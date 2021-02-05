@@ -39,7 +39,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Scap1",
- "modified": "2021-02-05 17:10:41.467392",
+ "modified": "2021-02-05 18:30:43.009445",
  "modified_by": "Administrator",
  "module": "Scap1",
  "name": "Scap1",
@@ -61,6 +61,12 @@
    "doc_view": "",
    "label": "ToDo1 Report",
    "link_to": "ToDo1",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Lead Details1",
+   "link_to": "Lead Details1",
    "type": "Report"
   }
  ]
