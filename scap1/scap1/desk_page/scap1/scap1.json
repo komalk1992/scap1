@@ -39,7 +39,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Scap1",
- "modified": "2021-02-05 15:45:40.695427",
+ "modified": "2021-02-05 16:11:52.398517",
  "modified_by": "Administrator",
  "module": "Scap1",
  "name": "Scap1",
@@ -53,7 +53,7 @@
    "doc_view": "",
    "format": "{} Published",
    "label": "doc1 scap1",
-   "link_to": "doc1 scap1",
+   "link_to": "ToDo1",
    "stats_filter": "",
    "type": "DocType"
   },

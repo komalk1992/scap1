@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "hash",
- "creation": "2021-02-05 15:41:15.203053",
+ "creation": "2021-02-05 16:10:42.722780",
  "doctype": "DocType",
  "document_type": "Setup",
  "email_append_to": 1,
@@ -157,10 +157,10 @@
  ],
  "icon": "fa fa-check",
  "links": [],
- "modified": "2021-02-05 15:41:15.203053",
+ "modified": "2021-02-05 16:10:42.722780",
  "modified_by": "Administrator",
  "module": "Scap1",
- "name": "doc1 scap1",
+ "name": "ToDo1",
  "owner": "Administrator",
  "permissions": [
   {
