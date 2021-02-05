@@ -24,8 +24,8 @@ def execute(filters=None):
 	todo_list.sort(key=lambda todo: (priority_map.get(todo.priority, 0),
 		todo.date and getdate(todo.date) or getdate("1900-01-01")), reverse=True)
 
-	columns = [_("ID")+":Link/ToDo:90", _("Priority")+"::60", _("Date")+ ":Date",
-		_("Description")+"::150", _("Assigned To/Owner") + ":Data:120",
+	columns = [_("ID")+":Link/ToDo:190", _("Priority1")+"::160", _("Date")+ ":Date",
+		_("Description1")+"::150", _("Assigned To/Owner") + ":Data:120",
 		_("Assigned By")+":Data:120", _("Reference")+"::200"]
 
 	result = []
