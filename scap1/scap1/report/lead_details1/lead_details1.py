@@ -163,3 +163,5 @@ def get_conditions(filters) :
 		conditions.append(" and `tabLead`.status=%(status)s")
 	
 	return " ".join(conditions) if conditions else ""
+
+
