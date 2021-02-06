@@ -62,7 +62,7 @@ class Analytics(object):
 				"fieldname": 'stock_uom',
 				"fieldtype": "Link",
 				"options": "UOM",
-				"width": 100
+				"width": 200
 			})
 
 		for end_date in self.periodic_daterange:
