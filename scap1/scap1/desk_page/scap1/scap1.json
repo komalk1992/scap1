@@ -39,7 +39,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Scap1",
- "modified": "2021-02-06 10:53:31.136722",
+ "modified": "2021-02-09 11:23:01.746795",
  "modified_by": "Administrator",
  "module": "Scap1",
  "name": "Scap1",
@@ -79,6 +79,12 @@
    "doc_view": "",
    "label": "ToDo2",
    "link_to": "ToDo2",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Product Sales",
+   "link_to": "prosales",
    "type": "Report"
   }
  ]

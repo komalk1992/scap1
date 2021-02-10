@@ -47,7 +47,14 @@ frappe.query_reports["Lead Details1"] = {
 			"fieldname":"territory",
 			"label": __("Territory"),
 			"fieldtype": "Link",
-			"options": "Territory",
+			"options": "Territory"
+		},
+		{
+			"fieldname":"source",
+			"label": __("Source"),
+			"fieldtype": "Link",
+			"options": "Lead Source"
 		}
+
 	]
 };

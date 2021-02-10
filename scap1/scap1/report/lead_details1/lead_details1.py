@@ -1,14 +1,3 @@
-# Copyright (c) 2013, sprics and contributors
-# For license information, please see license.txt
-
-#from __future__ import unicode_literals
-# import frappe
-
-#def execute(filters=None):
-#	columns, data = [], []
-#	return columns, data
-
-
 from __future__ import unicode_literals
 from frappe import _
 import frappe
@@ -30,7 +19,7 @@ def get_columns():
 			"label": _("Lead Name"),
 			"fieldname": "lead_name",
 			"fieldtype": "Data",
-			"width": 120
+			"width": 150,
 		},
 		{
 			"fieldname":"status",
@@ -53,10 +42,11 @@ def get_columns():
 			"width": 100
 		},
 		{
-			"label": _("Source"),
-			"fieldname": "source",
-			"fieldtype": "Data",
-			"width": 120
+			"label": _("Source1"),
+			"fieldname":"source",
+			"fieldtype": "Link",
+			"options": "Lead Source",
+			"width":200
 		},
 		{
 			"label": _("Email"),
@@ -115,7 +105,6 @@ def get_columns():
 			"options": "Country",
 			"width": 100
 		},
-		
 	]
 	return columns
 
@@ -148,6 +137,7 @@ def get_data(filters):
 			`tabAddress`.name=`tabDynamic Link`.parent)
 		WHERE
 			company = %(company)s
+			AND `tabLead`.source = %(source)s
 			AND `tabLead`.creation BETWEEN %(from_date)s AND %(to_date)s
 			{conditions}
 		ORDER BY 
@@ -161,7 +151,8 @@ def get_conditions(filters) :
 
 	if filters.get("status"):
 		conditions.append(" and `tabLead`.status=%(status)s")
-	
+	if filters.get("source"):
+		conditions.append(" and `tabLead`.source=%(source)s")
 	return " ".join(conditions) if conditions else ""
 
 
