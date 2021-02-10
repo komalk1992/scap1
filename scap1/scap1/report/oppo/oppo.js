@@ -2,14 +2,8 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["prosales"] = {
+frappe.query_reports["Oppo"] = {
 	"filters": [
 
-		{
-			"fieldname":"item",
-			"label": _("Item"),
-			"fieldtype": "Link",
-			"options": "Item"
-		}
 	]
 };
