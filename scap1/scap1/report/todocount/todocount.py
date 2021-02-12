@@ -1,14 +1,6 @@
 # Copyright (c) 2013, sprics and contributors
 # For license information, please see license.txt
 
-#from __future__ import unicode_literals
-# import frappe
-
-#def execute(filters=None):
-#	columns, data = [], []
-#	return columns, data
-
-
 from __future__ import unicode_literals
 import frappe
 from frappe import _
@@ -24,8 +16,8 @@ def execute(filters=None):
 	todo_list.sort(key=lambda todo: (priority_map.get(todo.priority, 0),
 		todo.date and getdate(todo.date) or getdate("1900-01-01")), reverse=True)
 
-	columns = [_("ID - Name")+":Link/ToDo:190", _("Priority123")+"::160", _("Date")+ ":Date",
-		_("Description1")+"::150", _("Assigned To/Owner") + ":Data:120",
+	columns = [_("ID")+":Link/ToDo:90", _("Priority")+"::60", _("Date")+ ":Date",
+		_("Description")+"::150", _("Assigned To/Owner") + ":Data:120",
 		_("Assigned By")+":Data:120", _("Reference")+"::200"]
 
 	result = []
