@@ -2,11 +2,14 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-# import frappe
+from frappe import _
+import frappe
 
-#def execute(filters=None):
-#	columns, data = [], []
-#	return columns, data
+def execute(filters=None):
+	columns, data = get_columns(), get_data()
+	return columns, data
+
+
 def get_columns():
 	columns = [
 		{
@@ -19,9 +22,10 @@ def get_columns():
 	]
 	return columns
 
-#	def get_data(filters):
-	return frappe.db.sql("""
+	def get_data():
+	data= frappe.db.sql("""
 		SELECT
 			COUNT(`tabLead`.name)
 		FROM
 			`tabLead` """)
+return data
