@@ -24,7 +24,7 @@ def get_columns():
 def get_data(filters):
 	return frappe.db.sql("""
 		SELECT
-			`tabLead`.name
+			COUNT(`tabLead`.name)
 		FROM
 			`tabLead`
 		WHERE
