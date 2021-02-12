@@ -16,7 +16,71 @@ def get_columns():
 			"fieldname": "name",
 			"fieldtype": "Link",
 			"options": "Lead",
-			"width": 150
+			"width": 150,
+		},
+		{
+			"label": _("Lead Name"),
+			"fieldname": "lead_name",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"fieldname":"status",
+			"label": _("Status"),
+			"fieldtype": "Data",
+			"width": 100
+		},
+		{
+			"fieldname":"lead_owner",
+			"label": _("Lead Owner"),
+			"fieldtype": "Link",
+			"options": "User",
+			"width": 100
+		},
+		{
+			"label": _("Territory"),
+			"fieldname": "territory",
+			"fieldtype": "Link",
+			"options": "Territory",
+			"width": 100
+		},
+		{
+			"label": _("Source"),
+			"fieldname": "source",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"label": _("Email"),
+			"fieldname": "email_id",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"label": _("Mobile"),
+			"fieldname": "mobile_no",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"label": _("Phone"),
+			"fieldname": "phone",
+			"fieldtype": "Data",
+			"width": 120
+		},
+		{
+			"label": _("Owner"),
+			"fieldname": "owner",
+			"fieldtype": "Link",
+			"options": "user",
+			"width": 120
+		},
+		{
+			"label": _("Company"),
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"options": "Company",
+			"width": 120
 		}
 	]
 	return columns
@@ -24,22 +88,17 @@ def get_columns():
 def get_data(filters):
 	return frappe.db.sql("""
 		SELECT
-			COUNT(`tabLead`.name)
+			`tabLead`.name,
+			`tabLead`.lead_name,
+			`tabLead`.status,
+			`tabLead`.lead_owner,
+			`tabLead`.territory,
+			`tabLead`.source,
+			`tabLead`.email_id,
+			`tabLead`.mobile_no,
+			`tabLead`.phone,
+			`tabLead`.owner,
+			`tabLead`.company
 		FROM
 			`tabLead`
-		WHERE
-			company = %(company)s
-			{conditions}
-		ORDER BY 
-			`tabLead`.creation asc """.format(conditions=get_conditions(filters)), filters, as_dict=1)
-
-def get_conditions(filters) :
-	conditions = []
-
-	if filters.get("territory"):
-		conditions.append(" and `tabLead`.territory=%(territory)s")
-
-	if filters.get("status"):
-		conditions.append(" and `tabLead`.status=%(status)s")
-	
-	return " ".join(conditions) if conditions else ""
+			""", as_dict=1)
