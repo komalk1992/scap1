@@ -6,9 +6,8 @@ from frappe import _
 import frappe
 
 def execute(filters=None):
-	columns, data = get_columns(), get_data()
+	columns, data = get_columns(), get_data(filters)
 	return columns, data
-
 
 def get_columns():
 	columns = [
@@ -22,10 +21,25 @@ def get_columns():
 	]
 	return columns
 
-	def get_data():
-	data= frappe.db.sql("""
+def get_data(filters):
+	return frappe.db.sql("""
 		SELECT
-			COUNT(`tabLead`.name)
+			`tabLead`.name
 		FROM
-			`tabLead` """)
-return data
+			`tabLead`
+		WHERE
+			company = %(company)s
+			{conditions}
+		ORDER BY 
+			`tabLead`.creation asc """.format(conditions=get_conditions(filters)), filters, as_dict=1)
+
+def get_conditions(filters) :
+	conditions = []
+
+	if filters.get("territory"):
+		conditions.append(" and `tabLead`.territory=%(territory)s")
+
+	if filters.get("status"):
+		conditions.append(" and `tabLead`.status=%(status)s")
+	
+	return " ".join(conditions) if conditions else ""
