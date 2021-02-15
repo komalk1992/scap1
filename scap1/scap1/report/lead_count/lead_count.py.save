@@ -1,0 +1,17 @@
+# Copyright (c) 2013, sprics and contributors
+# For license information, please see license.txt
+
+from __future__ import unicode_literals
+from frappe import _
+import frappe
+
+def execute(filters=None):
+
+	columns = [_("ID")+":Link/Lead:190", _("Lead Name")+"::160"]
+
+	result = []
+	for lead in lead_list:
+		lead = """<a href="/app/Form/%s/%s">%s: %s</a>""" % (todo.reference_type,
+					todo.reference_name, todo.reference_type, todo.reference_name)
+
+	return columns, result
