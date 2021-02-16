@@ -151,10 +151,18 @@ class Analytics(object):
 				d.entity = self.parent_child_map.get(d.entity)
 			period = self.get_period(d.get(self.date_field))
 			self.entity_periodic_data.setdefault(d.entity, frappe._dict()).setdefault(period, 0.0)
-			self.entity_periodic_data[d.entity][period] += flt(d.value_field, d.value_field2)
+			self.entity_periodic_data[d.entity][period] += flt(d.value_field)			
 
 			if self.filters.tree_type == "Item":
 				self.entity_periodic_data[d.entity]['stock_uom'] = d.stock_uom
+
+		for d1 in self.entries:
+			if self.filters.tree_type == "Supplier Group":
+				d1.entity = self.parent_child_map.get(d1.entity)
+			period = self.get_period(d1.get(self.date_field))
+			self.entity_periodic_data.setdefault(d1.entity, frappe._dict()).setdefault(period, 0.0)
+			self.entity_periodic_data[d1.entity][period] += flt(d1.value_fields)		
+				
 	def get_period(self, posting_date):
 		if self.filters.range == 'Weekly':
 			period = "Week " + str(posting_date.isocalendar()[1]) + " " + str(posting_date.year)
