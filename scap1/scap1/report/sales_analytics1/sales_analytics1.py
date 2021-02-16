@@ -18,6 +18,7 @@ class Analytics(object):
 		if self.filters.doc_type in ['Sales Order'] else 'posting_date'
 		self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 		self.get_period_date_ranges()
+		self.get_period1_date_ranges()
 
 	def run(self):
 		self.get_columns()
@@ -65,7 +66,7 @@ class Analytics(object):
 			})
 
 		for end_date in self.periodic_daterange:
-			period1 = self.get_period(end_date)
+			period1 = self.get_period1(end_date)
 			self.columns.append({
 				"label": _(period1),
 				"fieldname": scrub(period1),
@@ -126,8 +127,16 @@ class Analytics(object):
 			if self.filters.tree_type == "Item":
 				row["stock_uom"] = period_data.get("stock_uom")
 
+			self.data.append(row)
+
+		for entity, period1_data in iteritems(self.entity_periodic_data):
+			row = {
+				"entity": entity,
+				"entity_name": self.entity_names.get(entity) if hasattr(self, 'entity_names') else None
+			}
+			total = 0
 			for end_date in self.periodic_daterange:
-				period1 = self.get_period(end_date)
+				period1 = self.get_period1(end_date)
 				amount = flt(period_data.get(period1, 0.0))
 				row[scrub(period1)] = amount
 				total += amount
@@ -135,9 +144,9 @@ class Analytics(object):
 			row["total"] = total
 
 			if self.filters.tree_type == "Item":
-				row["stock_uom"] = period_data.get("stock_uom")	
+				row["stock_uom"] = period1_data.get("stock_uom")
 
-			self.data.append(row)
+			self.data.append(row)	
 
 	def get_rows_by_group(self):
 		self.get_periodic_data()
@@ -162,7 +171,7 @@ class Analytics(object):
 			out = [row] + out
 
 			for end_date in self.periodic_daterange:
-				period1 = self.get_period(end_date)
+				period1 = self.get_period1(end_date)
 				amount = flt(self.entity_periodic_data.get(d.name, {}).get(period1, 0.0))
 				row[scrub(period1)] = amount
 				if d.parent and (self.filters.tree_type != "Order Type" or d.parent == "Order Types"):
@@ -191,7 +200,7 @@ class Analytics(object):
 		for d1 in self.entries:
 			if self.filters.tree_type == "Supplier Group":
 				d1.entity = self.parent_child_map.get(d1.entity)
-			period1 = self.get_period(d1.get(self.date_field))
+			period1 = self.get_period1(d1.get(self.date_field))
 			self.entity_periodic_data.setdefault(d1.entity, frappe._dict()).setdefault(period1, 0.0)
 			self.entity_periodic_data[d1.entity][period1] += flt(d1.value_fields)		
 				
@@ -207,7 +216,7 @@ class Analytics(object):
 			period = str(year[0])
 		return period
 
-	def get_period(self, posting_date):
+	def get_period1(self, posting_date):
 		if self.filters.range == 'Weekly':
 			period1 = "Week " + str(posting_date.isocalendar()[1]) + " " + str(posting_date.year)
 		elif self.filters.range == 'Monthly':
@@ -229,6 +238,17 @@ class Analytics(object):
 			"Half-Yearly": 6,
 			"Yearly": 12
 		}.get(self.filters.range, 1)
+
+	def get_period1_date_ranges(self):
+		from dateutil.relativedelta import relativedelta, MO
+		from_date, to_date = getdate(self.filters.from_date), getdate(self.filters.to_date)
+
+		increment = {
+			"Monthly": 1,
+			"Quarterly": 3,
+			"Half-Yearly": 6,
+			"Yearly": 12
+		}.get(self.filters.range, 1)	
 
 		if self.filters.range in ['Monthly', 'Quarterly']:
 			from_date = from_date.replace(day=1)
@@ -252,6 +272,22 @@ class Analytics(object):
 			from_date = add_days(period_end_date, 1)
 			if period_end_date == to_date:
 				break
+
+		self.periodic_daterange = []
+		for dummy in range(1, 53):
+			if self.filters.range == "Weekly":
+				period1_end_date = add_days(from_date, 6)
+			else:
+				period1_end_date = add_to_date(from_date, months=increment, days=-1)
+
+			if period1_end_date > to_date:
+				period1_end_date = to_date
+
+			self.periodic_daterange.append(period1_end_date)
+
+			from_date = add_days(period1_end_date, 1)
+			if period1_end_date == to_date:
+				break		
 
 	def get_teams(self):
 		self.depth_map = frappe._dict()
