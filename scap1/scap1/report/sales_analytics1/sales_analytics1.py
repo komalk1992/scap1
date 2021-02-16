@@ -64,6 +64,15 @@ class Analytics(object):
 				"width": 100
 			})
 
+		for end_date in self.periodic_daterange:
+			period1 = self.get_period(end_date)
+			self.columns.append({
+				"label": _(period1),
+				"fieldname": scrub(period1),
+				"fieldtype": "Float",
+				"width": 100
+			})	
+
 		self.columns.append({
 			"label": _("Total"),
 			"fieldname": "total",
@@ -117,6 +126,17 @@ class Analytics(object):
 			if self.filters.tree_type == "Item":
 				row["stock_uom"] = period_data.get("stock_uom")
 
+			for end_date in self.periodic_daterange:
+				period1 = self.get_period(end_date)
+				amount = flt(period_data.get(period1, 0.0))
+				row[scrub(period1)] = amount
+				total += amount
+
+			row["total"] = total
+
+			if self.filters.tree_type == "Item":
+				row["stock_uom"] = period_data.get("stock_uom")	
+
 			self.data.append(row)
 
 	def get_rows_by_group(self):
@@ -141,6 +161,18 @@ class Analytics(object):
 			row["total"] = total
 			out = [row] + out
 
+			for end_date in self.periodic_daterange:
+				period1 = self.get_period(end_date)
+				amount = flt(self.entity_periodic_data.get(d.name, {}).get(period1, 0.0))
+				row[scrub(period1)] = amount
+				if d.parent and (self.filters.tree_type != "Order Type" or d.parent == "Order Types"):
+					self.entity_periodic_data.setdefault(d.parent, frappe._dict()).setdefault(period1, 0.0)
+					self.entity_periodic_data[d.parent][period1] += amount
+				total += amount
+
+			row["total"] = total
+			out = [row] + out
+
 		self.data = out
 
 	def get_periodic_data(self):
@@ -159,9 +191,9 @@ class Analytics(object):
 		for d1 in self.entries:
 			if self.filters.tree_type == "Supplier Group":
 				d1.entity = self.parent_child_map.get(d1.entity)
-			period = self.get_period(d1.get(self.date_field))
-			self.entity_periodic_data.setdefault(d1.entity, frappe._dict()).setdefault(period, 0.0)
-			self.entity_periodic_data[d1.entity][period] += flt(d1.value_fields)		
+			period1 = self.get_period(d1.get(self.date_field))
+			self.entity_periodic_data.setdefault(d1.entity, frappe._dict()).setdefault(period1, 0.0)
+			self.entity_periodic_data[d1.entity][period1] += flt(d1.value_fields)		
 				
 	def get_period(self, posting_date):
 		if self.filters.range == 'Weekly':
@@ -174,6 +206,18 @@ class Analytics(object):
 			year = get_fiscal_year(posting_date, company=self.filters.company)
 			period = str(year[0])
 		return period
+
+	def get_period(self, posting_date):
+		if self.filters.range == 'Weekly':
+			period1 = "Week " + str(posting_date.isocalendar()[1]) + " " + str(posting_date.year)
+		elif self.filters.range == 'Monthly':
+			period1 = str(self.months[posting_date.month - 1]) + " " + str(posting_date.year)
+		elif self.filters.range == 'Quarterly':
+			period1 = "Quarter " + str(((posting_date.month - 1) // 3) + 1) + " " + str(posting_date.year)
+		else:
+			year = get_fiscal_year(posting_date, company=self.filters.company)
+			period1 = str(year[0])
+		return period1	
 
 	def get_period_date_ranges(self):
 		from dateutil.relativedelta import relativedelta, MO
