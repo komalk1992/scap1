@@ -18,7 +18,13 @@ class Analytics(object):
 		if self.filters.doc_type in ['Sales Order'] else 'posting_date'
 		self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 		self.get_period_date_ranges()
-		self.get_period1_date_ranges()
+		
+	def __init__(self, filters=None):
+		self.filters = frappe._dict(filters or {})
+		self.date_field = 'transaction_date' \
+		if self.filters.doc_type in ['Sales Order'] else 'posting_date'
+		self.months = ["Jan1", "Feb1", "Mar1", "Apr1", "May1", "Jun1", "Jul1", "Aug1", "Sep1", "Oct1", "Nov1", "Dec1"]
+		self.get_period1_date_ranges()	
 
 	def run(self):
 		self.get_columns()
