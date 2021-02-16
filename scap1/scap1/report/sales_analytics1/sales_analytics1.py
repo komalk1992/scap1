@@ -88,7 +88,7 @@ class Analytics(object):
 			where s.name = i.parent and i.docstatus = 1 and s.company = %s
 			and s.{date_field} between %s and %s
 		"""
-		.format(date_field=self.date_field, value_field1=value_field, doctype=self.filters.doc_type),
+		.format(date_field=self.date_field, value_field=value_field, doctype=self.filters.doc_type),
 		(self.filters.company, self.filters.from_date, self.filters.to_date), as_dict=1)
 
 		self.entity_names = {}
