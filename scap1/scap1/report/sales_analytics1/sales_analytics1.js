@@ -27,8 +27,9 @@ frappe.query_reports["Sales Analytics1"] = {
 			options: [
 				{ "value": "Value", "label": __("Value") },
 				{ "value": "Quantity", "label": __("Quantity") },
+				{ "value": "QV", "label": __("QV") },
 			],
-			default: "Value",
+			default: "QV",
 			reqd: 1
 		},
 		{
