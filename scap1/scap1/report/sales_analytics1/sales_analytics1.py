@@ -83,7 +83,7 @@ class Analytics(object):
 			value_field1 = 'base_amount'
 
 		self.entries = frappe.db.sql("""
-			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.{value_field1} as value_field1, s.{date_field}
+			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.{value_field1} as value_field, s.{date_field}
 			from `tab{doctype} Item` i , `tab{doctype}` s
 			where s.name = i.parent and i.docstatus = 1 and s.company = %s
 			and s.{date_field} between %s and %s
