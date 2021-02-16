@@ -48,7 +48,7 @@ class Analytics(object):
 
 		if self.filters.tree_type == "Item":
 			self.columns.append({
-				"label": _("UOM"),
+				"label": _("UOM123"),
 				"fieldname": 'stock_uom',
 				"fieldtype": "Link",
 				"options": "UOM",
