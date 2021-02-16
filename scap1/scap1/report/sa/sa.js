@@ -20,6 +20,19 @@ frappe.query_reports["SA"] = {
                         "fieldtype": "Date",
                         "default": frappe.defaults.get_user_default("year_end_date"),
                         "reqd": 1
-                }
+                },
+		{
+			fieldname: "range",
+			label: __("Range"),
+			fieldtype: "Select",
+			options: [
+				{ "value": "Weekly", "label": __("Weekly") },
+				{ "value": "Monthly", "label": __("Monthly") },
+				{ "value": "Quarterly", "label": __("Quarterly") },
+				{ "value": "Yearly", "label": __("Yearly") }
+			],
+			"default": "Monthly",
+			reqd: 1
+		}
         ]
 };

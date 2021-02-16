@@ -18,7 +18,7 @@ def get_columns():
                 {
                         "label": _("Amount"),
                         "fieldname": "amount",
-                        "fieldtype": "Currency",
+                        "fieldtype": "Float",
                         "width": 120
                 }
         ]
@@ -28,11 +28,12 @@ def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
                         `tabSales Order Item`.item_code,
-                        `tabSales Order Item`.amount
+                        sum(`tabSales Order Item`.amount)
                 FROM
                         `tabSales Order Item`,`tabSales Order`
                 WHERE
                         `tabSales Order Item`.`parent`=`tabSales Order`.`name`
+			AND `tabSales Order`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
                         {conditions}
                 GROUP BY
                         `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters,
