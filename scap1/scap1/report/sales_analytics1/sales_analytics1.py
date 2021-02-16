@@ -151,8 +151,8 @@ class Analytics(object):
 				d.entity = self.parent_child_map.get(d.entity)
 			period = self.get_period(d.get(self.date_field))
 			self.entity_periodic_data.setdefault(d.entity, frappe._dict()).setdefault(period, 0.0)
-			self.entity_periodic_data[d.entity][period] += flt(d.value_field)
-			self.entity_periodic_data[d.entity][period] += flt(d.value_fields)
+			self.entity_periodic_data[d.entity][period] += flt(d.value_field) + " " + flt(d.value_fields)
+#			self.entity_periodic_data[d.entity][period] += flt(d.value_fields)
 
 			if self.filters.tree_type == "Item":
 				self.entity_periodic_data[d.entity]['stock_uom'] = d.stock_uom
