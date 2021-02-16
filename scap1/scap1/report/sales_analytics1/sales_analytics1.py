@@ -64,15 +64,6 @@ class Analytics(object):
 				"width": 100
 			})
 
-		for end_date in self.periodic_daterange:
-			period1 = self.get_period(end_date)
-			self.columns.append({
-				"label": _(period1),
-				"fieldname": scrub(period1),
-				"fieldtype": "Float",
-				"width": 100
-			})	
-
 		self.columns.append({
 			"label": _("Total"),
 			"fieldname": "total",
@@ -119,7 +110,6 @@ class Analytics(object):
 				period = self.get_period(end_date)
 				amount = flt(period_data.get(period, 0.0))
 				row[scrub(period)] = amount
-				row[scrub(period1)] = amount
 				total += amount
 
 			row["total"] = total
@@ -143,11 +133,9 @@ class Analytics(object):
 				period = self.get_period(end_date)
 				amount = flt(self.entity_periodic_data.get(d.name, {}).get(period, 0.0))
 				row[scrub(period)] = amount
-				row[scrub(period1)] = amount
 				if d.parent and (self.filters.tree_type != "Order Type" or d.parent == "Order Types"):
 					self.entity_periodic_data.setdefault(d.parent, frappe._dict()).setdefault(period, 0.0)
 					self.entity_periodic_data[d.parent][period] += amount
-					self.entity_periodic_data[d.parent][period1] += amount
 				total += amount
 
 			row["total"] = total
@@ -164,7 +152,7 @@ class Analytics(object):
 			period = self.get_period(d.get(self.date_field))
 			self.entity_periodic_data.setdefault(d.entity, frappe._dict()).setdefault(period, 0.0)
 			self.entity_periodic_data[d.entity][period] += flt(d.value_field)
-			self.entity_periodic_data[d.entity][period1] += flt(d.value_fields)
+			self.entity_periodic_data[d.entity][period] += flt(d.value_fields)
 
 			if self.filters.tree_type == "Item":
 				self.entity_periodic_data[d.entity]['stock_uom'] = d.stock_uom
