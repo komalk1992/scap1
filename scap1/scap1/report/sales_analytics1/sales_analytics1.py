@@ -38,7 +38,7 @@ class Analytics(object):
 				"fieldtype": "Link" if self.filters.tree_type != "Order Type" else "Data",
 				"width": 140 if self.filters.tree_type != "Order Type" else 200
 			}]
-		if self.filters.tree_type in ["Item"]:
+		if self.filters.tree_type in ["Item Code"]:
 			self.columns.append({
 				"label": _(self.filters.tree_type + " Name"),
 				"fieldname": "entity_name",
@@ -48,7 +48,7 @@ class Analytics(object):
 
 		if self.filters.tree_type == "Item":
 			self.columns.append({
-				"label": _("UOM123"),
+				"label": _("UOM"),
 				"fieldname": 'stock_uom',
 				"fieldtype": "Link",
 				"options": "UOM",
@@ -79,10 +79,8 @@ class Analytics(object):
 
 	def get_sales_transactions_based_on_items(self):
 
-		if self.filters["value_quantity"] == 'Value':
-			value_field = 'base_amount'
-		else:
-			value_field = 'stock_qty'
+		if self.filters["value_quantity"] == 'QV':
+			value_field = 'base_amount' and  'stock_qty'
 
 		self.entries = frappe.db.sql("""
 			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.{value_field} as value_field, s.{date_field}
@@ -221,16 +219,16 @@ class Analytics(object):
 		self.parent_child_map = frappe._dict(frappe.db.sql(""" select name, supplier_group from `tabSupplier`"""))
 
 	def get_chart_data(self):
-		length = len(self.columns)
+                length = len(self.columns)
 
-		if self.filters.tree_type == "Item":
-			labels = [d.get("label") for d in self.columns[3:length - 1]]
-		else:
-			labels = [d.get("label") for d in self.columns[1:length - 1]]
-		self.chart = {
-			"data": {
-				'labels': labels,
-				'datasets': []
-			},
-			"type": "line"
-		}
+                if self.filters.tree_type == "Item":
+                        labels = [d.get("label") for d in self.columns[3:length - 1]]
+                else:
+                        labels = [d.get("label") for d in self.columns[1:length - 1]]
+                self.chart = {
+                        "data": {
+                                'labels': labels,
+                                'datasets': []
+                        },
+                        "type": "line"
+                }
