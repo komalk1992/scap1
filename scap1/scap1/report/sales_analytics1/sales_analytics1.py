@@ -82,6 +82,9 @@ class Analytics(object):
 		if self.filters["value_quantity"] == 'QV':
 			value_field = 'base_amount'
 
+		else:	
+			value_field = 'base_amount'
+
 		self.entries = frappe.db.sql("""
 			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.stock_qty as value_field1, i.{value_field} as value_field, s.{date_field}
 			from `tab{doctype} Item` i , `tab{doctype}` s
