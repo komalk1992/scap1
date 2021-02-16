@@ -80,15 +80,14 @@ class Analytics(object):
 	def get_sales_transactions_based_on_items(self):
 
 		if self.filters["value_quantity"] == 'QV':
-			value_field = 'base_amount' and  'stock_qty'
 
 		self.entries = frappe.db.sql("""
-			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.{value_field} as value_field, s.{date_field}
+			select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.stock_qty as qty123, i.base_amount as amount123, s.{date_field}
 			from `tab{doctype} Item` i , `tab{doctype}` s
 			where s.name = i.parent and i.docstatus = 1 and s.company = %s
 			and s.{date_field} between %s and %s
 		"""
-		.format(date_field=self.date_field, value_field=value_field, doctype=self.filters.doc_type),
+		.format(date_field=self.date_field, doctype=self.filters.doc_type),
 		(self.filters.company, self.filters.from_date, self.filters.to_date), as_dict=1)
 
 		self.entity_names = {}
