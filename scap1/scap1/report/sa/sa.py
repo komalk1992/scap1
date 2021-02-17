@@ -7,7 +7,9 @@ def execute(filters=None):
         return columns, data
 
 def get_columns():
-        if filters.range in ["Week"]:
+
+        if self.filters.range == "Week":
+
         columns = [
                 {
                         "label": _("Item"),
@@ -26,7 +28,9 @@ def get_columns():
         return columns
 
 def get_data(filters):
-        if filters.range in ["Week"]:
+
+        if self.filters.range == "Week":
+
         datasales =  frappe.db.sql("""
                 SELECT
                         `tabSales Order Item`.item_code,
