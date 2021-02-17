@@ -120,6 +120,11 @@ class Analytics(object):
 				row[scrub(period)] = amount
 				total += amount
 
+				period1 = self.get_period(end_date)
+				amount1 = flt(period_data.get(period1, 0.0))
+				row[scrub(period1)] = amount1
+				total += amount1
+
 			row["total"] = total
 
 			if self.filters.tree_type == "Item":
@@ -145,6 +150,15 @@ class Analytics(object):
 					self.entity_periodic_data.setdefault(d.parent, frappe._dict()).setdefault(period, 0.0)
 					self.entity_periodic_data[d.parent][period] += amount
 				total += amount
+
+			period1 = self.get_period(end_date)
+				amount1 = flt(self.entity_periodic_data.get(d.name, {}).get(period1, 0.0))
+				row[scrub(period1)] = amount1
+				if d.parent and (self.filters.tree_type != "Order Type" or d.parent == "Order Types"):
+					self.entity_periodic_data.setdefault(d.parent, frappe._dict()).setdefault(period1, 0.0)
+					self.entity_periodic_data[d.parent][period1] += amount1
+				total += amount1	
+
 
 			row["total"] = total
 			out = [row] + out
