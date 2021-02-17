@@ -64,6 +64,14 @@ class Analytics(object):
 				"width": 100
 			})
 
+			period1 = self.get_period(end_date)
+			self.columns.append({
+				"label": _(period1),
+				"fieldname": scrub(period1),
+				"fieldtype": "Float",
+				"width": 100
+			})
+
 		self.columns.append({
 			"label": _("Total"),
 			"fieldname": "total",
