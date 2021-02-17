@@ -6,9 +6,8 @@ def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
-def get_columns(self):
+def get_columns():
         columns = [
-        if self.filters["range"] == 'Week':
                 {
                         "label": _("Item"),
                         "fieldname": "item_code",
