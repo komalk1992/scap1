@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
-from frappe import _
 import frappe
+from frappe import _, scrub
+from frappe.utils import getdate, flt, add_to_date, add_days
+from six import iteritems
+from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
@@ -15,12 +18,14 @@ def get_columns():
                         "options": "Item",
                         "width": 150
                 },
-                {
+                
+                if filters.range in ["Week"]:
+                        columns.append({
                         "label": _("Amount"),
                         "fieldname": "amount",
                         "fieldtype": "Float",
                         "width": 120
-                }
+                        })
         ]
         return columns
 
