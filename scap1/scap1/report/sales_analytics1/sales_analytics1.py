@@ -188,7 +188,8 @@ class Analytics(object):
 			year = get_fiscal_year(posting_date, company=self.filters.company)
 			period1 = str(year[0])
 
-		return period, period1
+		return period
+		return period1
 
 	def get_period_date_ranges(self):
 		from dateutil.relativedelta import relativedelta, MO
