@@ -120,11 +120,6 @@ class Analytics(object):
 				row[scrub(period)] = amount
 				total += amount
 
-				period1 = self.get_period(end_date)
-				amount1 = flt(period_data.get(period1, 0.0))
-				row[scrub(period1)] = amount1
-				total += amount1
-
 			row["total"] = total
 
 			if self.filters.tree_type == "Item":
@@ -151,15 +146,6 @@ class Analytics(object):
 					self.entity_periodic_data[d.parent][period] += amount
 				total += amount
 
-			period1 = self.get_period(end_date)
-				amount1 = flt(self.entity_periodic_data.get(d.name, {}).get(period1, 0.0))
-				row[scrub(period1)] = amount1
-				if d.parent and (self.filters.tree_type != "Order Type" or d.parent == "Order Types"):
-					self.entity_periodic_data.setdefault(d.parent, frappe._dict()).setdefault(period1, 0.0)
-					self.entity_periodic_data[d.parent][period1] += amount1
-				total += amount1	
-
-
 			row["total"] = total
 			out = [row] + out
 
@@ -174,10 +160,7 @@ class Analytics(object):
 			period = self.get_period(d.get(self.date_field))
 			self.entity_periodic_data.setdefault(d.entity, frappe._dict()).setdefault(period, 0.0)
 			self.entity_periodic_data[d.entity][period] += flt(d.value_field)
-			
-			period1 = self.get_period(d.get(self.date_field))
-			self.entity_periodic_data.setdefault(d.entity, frappe._dict()).setdefault(period1, 0.0)
-			self.entity_periodic_data[d.entity][period1] += flt(d.value_fields)
+#			self.entity_periodic_data[d.entity][period] += flt(d.value_fields)
 
 			if self.filters.tree_type == "Item":
 				self.entity_periodic_data[d.entity]['stock_uom'] = d.stock_uom
@@ -191,19 +174,7 @@ class Analytics(object):
 		else:
 			year = get_fiscal_year(posting_date, company=self.filters.company)
 			period = str(year[0])
-		
-		if self.filters.range == 'Weekly':
-			period1 = "Week " + str(posting_date.isocalendar()[1]) + " " + str(posting_date.year)
-		elif self.filters.range == 'Monthly':
-			period1 = str(self.months[posting_date.month - 1]) + " " + str(posting_date.year)
-		elif self.filters.range == 'Quarterly':
-			period1 = "Quarter " + str(((posting_date.month - 1) // 3) + 1) + " " + str(posting_date.year)
-		else:
-			year = get_fiscal_year(posting_date, company=self.filters.company)
-			period1 = str(year[0])
-
 		return period
-		return period1
 
 	def get_period_date_ranges(self):
 		from dateutil.relativedelta import relativedelta, MO
