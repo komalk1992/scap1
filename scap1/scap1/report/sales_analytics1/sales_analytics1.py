@@ -191,6 +191,7 @@ class Analytics(object):
 		else:
 			year = get_fiscal_year(posting_date, company=self.filters.company)
 			period = str(year[0])
+			
 		return period	
 	
 	def get_period1(self, posting_date):	
