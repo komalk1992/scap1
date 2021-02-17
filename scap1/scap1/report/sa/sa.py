@@ -1,30 +1,12 @@
 from __future__ import unicode_literals
+from frappe import _
 import frappe
-from frappe import _, scrub
-from frappe.utils import getdate, flt, add_to_date, add_days
-from six import iteritems
-from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
-        return Analytics(filters).run()
+        columns, data = get_columns(), get_data(filters)
+        return columns, data
 
-        class Analytics(object):
-        def __init__(self, filters=None):
-                self.filters = frappe._dict(filters or {})
-                self.date_field = 'transaction_date' \
-                if self.filters.doc_type in ['Sales Order'] else 'posting_date'
-                self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-                self.get_period_date_ranges()
-
-        def run(self):
-                self.get_columns()
-                self.get_data()
-                self.get_chart_data()
-
-                # Skipping total row for tree-view reports
-                skip_total_row = 0
-
-                return self.columns, self.data, None, self.chart, None, skip_total_row
+if filters.range == "Week":
 
 def get_columns():
         columns = [
@@ -42,16 +24,9 @@ def get_columns():
                         "width": 120
                 }
         ]
-                for end_date in self.periodic_daterange:
-                        period = self.get_period(end_date)
-                        self.columns.append({
-                                "label": _(period),
-                                "fieldname": scrub(period),
-                                "fieldtype": "Float",
-                                "width": 100
-                        })
         return columns
 
+if filters.range == "Week":
 def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
