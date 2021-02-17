@@ -177,7 +177,18 @@ class Analytics(object):
 		else:
 			year = get_fiscal_year(posting_date, company=self.filters.company)
 			period = str(year[0])
-		return period
+		
+		if self.filters.range == 'Weekly':
+			period1 = "Week " + str(posting_date.isocalendar()[1]) + " " + str(posting_date.year)
+		elif self.filters.range == 'Monthly':
+			period1 = str(self.months[posting_date.month - 1]) + " " + str(posting_date.year)
+		elif self.filters.range == 'Quarterly':
+			period1 = "Quarter " + str(((posting_date.month - 1) // 3) + 1) + " " + str(posting_date.year)
+		else:
+			year = get_fiscal_year(posting_date, company=self.filters.company)
+			period1 = str(year[0])
+
+		return period, period1
 
 	def get_period_date_ranges(self):
 		from dateutil.relativedelta import relativedelta, MO
