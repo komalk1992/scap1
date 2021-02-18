@@ -6,7 +6,6 @@ def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
-if filters.range in ['Week']:
         def get_columns():
         columns = [
                 {
