@@ -2,12 +2,12 @@ from __future__ import unicode_literals
 from frappe import _
 import frappe
 
-def execute(filters=None):
+def execute(self,filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
-def get_columns():
-        if range in ['Week']:
+def get_columns(self):
+        if self.filters.range in ['Week']:
                 columns = [
                         {
                                 "label": _("Item"),
