@@ -3,29 +3,26 @@ from frappe import _
 import frappe
 
 def execute(filters=None):
-        def __init__(self, filters=None):
-        def run(self):
-                self.get_columns()
-                self.get_data()
+        columns, data = get_columns(), get_data(filters)
+        return columns, data
 
-        def get_columns(self):
-                if self.filters.range == "Week":
-                        columns = [
-                                {
-                                        "label": _("Item"),
-                                        "fieldname": "item_code",
-                                        "fieldtype": "Link",
-                                        "options": "Item",
-                                        "width": 150
-                                },
-                                {
-                                        "label": _("Amount"),
-                                        "fieldname": "amount",
-                                        "fieldtype": "Float",
-                                        "width": 120
-                                }
-                        ]
-                        return columns
+def get_columns():
+        columns = [
+                {
+                        "label": _("Item"),
+                        "fieldname": "item_code",
+                        "fieldtype": "Link",
+                        "options": "Item",
+                        "width": 150
+                },
+                {
+                        "label": _("Amount"),
+                        "fieldname": "amount",
+                        "fieldtype": "Float",
+                        "width": 120
+                }
+        ]
+        return columns
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
