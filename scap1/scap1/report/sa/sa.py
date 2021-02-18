@@ -9,8 +9,8 @@ def execute(filters=None):
         def __init__(self, filters=None):
 
         def run(self):
-        self.get_columns()
-        self.get_data()
+                self.get_columns()
+                self.get_data()
 
 def get_columns(self):
         if self.filters.range == "Week":
