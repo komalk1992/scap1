@@ -3,7 +3,7 @@ from frappe import _
 import frappe
 
 def execute(self,filters=None):
-        columns, data = get_columns(), get_data(filters)
+        columns, data = self.get_columns(), get_data(filters)
         return columns, data
 
 def get_columns(self):
@@ -23,7 +23,7 @@ def get_columns(self):
                                 "width": 120
                         }
                 ]
-                return columns
+                return self.columns
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
