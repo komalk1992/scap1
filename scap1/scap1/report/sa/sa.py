@@ -6,23 +6,24 @@ def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
-def get_columns():
-        columns = [
-                {
-                        "label": _("Item"),
-                        "fieldname": "item_code",
-                        "fieldtype": "Link",
-                        "options": "Item",
-                        "width": 150
-                },
-                {
-                        "label": _("Amount"),
-                        "fieldname": "amount",
-                        "fieldtype": "Float",
-                        "width": 120
-                }
-        ]
-        return columns
+def get_columns(self):
+        if self.filters.range in ['Week']:
+                columns = [
+                        {
+                                "label": _("Item"),
+                                "fieldname": "item_code",
+                                "fieldtype": "Link",
+                                "options": "Item",
+                                "width": 150
+                        },
+                        {
+                                "label": _("Amount"),
+                                "fieldname": "amount",
+                                "fieldtype": "Float",
+                                "width": 120
+                        }
+                ]
+                return columns
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
