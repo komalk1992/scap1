@@ -23,7 +23,7 @@ def get_columns(self):
                                 "width": 120
                         }
                 ]
-                return self.columns
+                return columns
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
