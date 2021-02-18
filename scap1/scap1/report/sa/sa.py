@@ -5,11 +5,12 @@ import frappe
 def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
+        
+        def __init__(self, filters=None):
 
-def __init__(self, filters=None):
-def run(self):
-                self.get_columns()
-                self.get_data()    
+        def run(self):
+        self.get_columns()
+        self.get_data()
 
 def get_columns(self):
         if self.filters.range == "Week":
