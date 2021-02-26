@@ -6,27 +6,27 @@ from six import iteritems
 from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
+         if filters.range == 'Week':
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
 def get_columns():
-        if filters.range == 'Week':
-                columns = [
-                        {
-                                "label": _("Item"),
-                                "fieldname": "item_code",
-                                "fieldtype": "Link",
-                                "options": "Item",
-                                "width": 150
-                        },
-                        {
-                                "label": _("Amount"),
-                                "fieldname": "amount",
-                                "fieldtype": "Float",
-                                "width": 120
-                        }
-                ]
-                return columns
+        columns = [
+                {
+                        "label": _("Item"),
+                        "fieldname": "item_code",
+                        "fieldtype": "Link",
+                        "options": "Item",
+                        "width": 150
+                },
+                {
+                        "label": _("Amount"),
+                        "fieldname": "amount",
+                        "fieldtype": "Float",
+                        "width": 120
+                }
+        ]
+        return columns
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
