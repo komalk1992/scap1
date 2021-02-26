@@ -88,7 +88,7 @@ class Analytics(object):
 	def get_sales_transactions_based_on_items(self):
 
 		if self.filters["value_quantity"] == 'QV':
-			value_field = 'base_amount'
+			value_field = 'base_amount' || 'stock_qty'
 			value_fields = 'stock_qty'
 
 		self.entries = frappe.db.sql("""
