@@ -10,10 +10,10 @@ def execute(filters=None):
         return columns, data
 
 def get_conditions(filters) :
-        columns, data = get_columns(), get_data(filters)
-        return columns, data
         conditions = []
         if filters.range == "Week":
+                columns, data = get_columns(), get_data(filters)
+                return columns, data
                 def get_columns():
                         columns = [
                                 {
