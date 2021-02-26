@@ -6,8 +6,7 @@ from six import iteritems
 from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        columns, data = get_columns(), get_data(filters), get_period_date_ranges(), get_period()
+        columns, data = get_columns(), get_data(filters)
         return columns, data
 
 def get_columns():
@@ -24,12 +23,6 @@ def get_columns():
                         "fieldname": "amount",
                         "fieldtype": "Float",
                         "width": 120
-                },
-                {
-                        "label": _(period),
-                        "fieldname": scrub(period),
-                        "fieldtype": "Float",
-                        "width": 100
                 }
         ]
         return columns
