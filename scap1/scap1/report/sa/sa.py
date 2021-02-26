@@ -9,6 +9,9 @@ def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
+def get_conditions(filters) :
+        conditions = []
+        if filters.range == "Week":
 def get_columns():
         columns = [
                 {
@@ -26,6 +29,7 @@ def get_columns():
                 }
         ]
         return columns
+        return " ".join(conditions) if conditions else ""
 
 def get_data(filters):
         datasales =  frappe.db.sql("""
