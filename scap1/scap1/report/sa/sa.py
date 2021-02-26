@@ -12,23 +12,23 @@ def execute(filters=None):
 def get_conditions(filters) :
         conditions = []
         if filters.range == "Week":
-def get_columns():
-        columns = [
-                {
-                        "label": _("Item"),
-                        "fieldname": "item_code",
-                        "fieldtype": "Link",
-                        "options": "Item",
-                        "width": 150
-                },
-                {
-                        "label": _("Amount"),
-                        "fieldname": "amount",
-                        "fieldtype": "Float",
-                        "width": 120
-                }
-        ]
-        return columns
+        def get_columns():
+                columns = [
+                        {
+                                "label": _("Item"),
+                                "fieldname": "item_code",
+                                "fieldtype": "Link",
+                                "options": "Item",
+                                "width": 150
+                        },
+                        {
+                                "label": _("Amount"),
+                                "fieldname": "amount",
+                                "fieldtype": "Float",
+                                "width": 120
+                        }
+                ]
+                return columns
         return " ".join(conditions) if conditions else ""
 
 def get_data(filters):
