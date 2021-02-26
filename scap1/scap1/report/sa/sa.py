@@ -7,7 +7,7 @@ from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        columns, data = get_columns(), get_data(filters), get_period_date_ranges()
+        columns, data = get_columns(), get_data(filters), get_period_date_ranges(), get_period()
         return columns, data
 
 def get_columns():
