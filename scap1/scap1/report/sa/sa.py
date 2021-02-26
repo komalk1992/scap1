@@ -6,7 +6,6 @@ from six import iteritems
 from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
-         if filters.range == 'Week':
         columns, data = get_columns(), get_data(filters)
         return columns, data
 
