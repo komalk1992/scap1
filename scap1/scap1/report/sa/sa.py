@@ -48,6 +48,7 @@ def get_conditions(filters) :
         conditions = []
 
         if filters.get("item_code"):
-                conditions.append(" and `tabSales Order Item`.item_code=%(item_code)s")
-
+                conditions.append(" and `tabSales Order Item`.item_code=%(item_code)s")       
+        if filters.get("range" == "Week"):
+                conditions.append(" and `tabSales Order`.transaction_date = `tabSales Order`.transaction_date BETWEEN "2020-10-1" AND "2020-10-31" ")        
         return " ".join(conditions) if conditions else ""
