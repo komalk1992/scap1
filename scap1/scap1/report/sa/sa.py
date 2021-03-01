@@ -22,13 +22,13 @@ def get_columns():
                         "label": _("Total Qty"),
                         "fieldname": "qty",
                         "fieldtype": "Float",
-                        "width": 120
+                        "width": 100
                 },
                 {
                         "label": _("Amount"),
                         "fieldname": "amount",
                         "fieldtype": "Float",
-                        "width": 120
+                        "width": 100
                 }
         ]
         return columns
