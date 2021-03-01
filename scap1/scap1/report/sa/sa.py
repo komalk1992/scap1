@@ -113,8 +113,8 @@ def get_data(filters):
             datasales1 =  frappe.db.sql("""
                     SELECT
                             `tabSales Order Item`.item_code,
-                            sum(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", qty, 0),
-                            sum(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0)
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", qty, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0))
                     FROM
                             `tabSales Order Item`,`tabSales Order`
                     WHERE
