@@ -149,8 +149,8 @@ def get_data(filters):
             datasales1 =  frappe.db.sql("""
                     SELECT
                             `tabSales Order Item`.item_code,
-                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", qty, 0)),
-                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", qty, 0)) as "QTR-1 Total Qty",
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0)) as "QTR-1 Amount",
                             sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", qty, 0)),
                             sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", amount, 0)),
                             sum(if(`tabSales Order`.`transaction_date` between "2020-10-01" and "2020-12-31", qty, 0)),
