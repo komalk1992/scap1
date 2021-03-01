@@ -73,18 +73,6 @@ def get_columns(filters):
                                         "width": 150
                                 },
                                 {
-                                        "label": _("QTR-1 Total Qty"),
-                                        "fieldname": "qty",
-                                        "fieldtype": "Float",
-                                        "width": 115
-                                },
-                                {
-                                        "label": _("QTR-1 Amount"),
-                                        "fieldname": "amount",
-                                        "fieldtype": "Float",
-                                        "width": 100
-                                },
-                                {
                                         "label": _("QTR-2 Total Qty"),
                                         "fieldname": "qty",
                                         "fieldtype": "Float",
