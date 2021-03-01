@@ -145,12 +145,12 @@ def get_data(filters):
             return datasales
 
         if filters.get('range') == ('Quarterly'):
-            year = "2020"
+            year = "2020-04-01"
             
             datasales1 =  frappe.db.sql("""
                     SELECT
                             `tabSales Order Item`.item_code,
-                            sum(if(`tabSales Order`.`transaction_date` between "{year}-04-01" and "2020-06-30", qty, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between {year} and "2020-06-30", qty, 0)),
                             sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0)),
                             sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", qty, 0)),
                             sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", amount, 0)),
