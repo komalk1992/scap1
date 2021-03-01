@@ -65,22 +65,23 @@ def get_columns(filters):
         return columns
 
 def get_data(filters):
-        datasales =  frappe.db.sql("""
-                SELECT
-                        `tabSales Order Item`.item_code,
-                        sum(`tabSales Order Item`.qty),
-                        sum(`tabSales Order Item`.amount)
-                FROM
-                        `tabSales Order Item`,`tabSales Order`
-                WHERE
-                        `tabSales Order Item`.`parent`=`tabSales Order`.`name`
-			AND `tabSales Order`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
-                        {conditions}
-                GROUP BY
-                        `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters,
-as_list=1)
+         if filters.get('range') == ('Week'):
+            
+            datasales =  frappe.db.sql("""
+                    SELECT
+                            `tabSales Order Item`.item_code,
+                            sum(`tabSales Order Item`.qty),
+                            sum(`tabSales Order Item`.amount)
+                    FROM
+                            `tabSales Order Item`,`tabSales Order`
+                    WHERE
+                            `tabSales Order Item`.`parent`=`tabSales Order`.`name`
+    			AND `tabSales Order`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
+                            {conditions}
+                    GROUP BY
+                            `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters, as_list=1)
 
-        return datasales
+            return datasales
 
 def get_conditions(filters) :
         conditions = []
