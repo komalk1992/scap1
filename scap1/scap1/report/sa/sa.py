@@ -145,7 +145,7 @@ def get_data(filters):
             return datasales
 
         if filters.get('range') == ('Quarterly'):
-            year = 2020
+            year = "2020"
             
             datasales1 =  frappe.db.sql("""
                     SELECT
@@ -165,7 +165,7 @@ def get_data(filters):
                 AND `tabSales Order`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
                             {conditions}
                     GROUP BY
-                            `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), year=year, filters, as_list=1)
+                            `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters, as_list=1)
 
             return datasales1
 
