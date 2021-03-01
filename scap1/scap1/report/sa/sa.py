@@ -82,7 +82,7 @@ def get_columns(filters):
                                         "label": _("QTR-1 Amount"),
                                         "fieldname": "amount1",
                                         "fieldtype": "Float",
-                                        "width": 100
+                                        "width": 105
                                 },
                                 {
                                         "label": _("QTR-2 Total Qty"),
@@ -94,7 +94,7 @@ def get_columns(filters):
                                         "label": _("QTR-2 Amount"),
                                         "fieldname": "amount2",
                                         "fieldtype": "Float",
-                                        "width": 100
+                                        "width": 105
                                 },
                                 {
                                         "label": _("QTR-3 Total Qty"),
@@ -106,7 +106,7 @@ def get_columns(filters):
                                         "label": _("QTR-3 Amount"),
                                         "fieldname": "amount3",
                                         "fieldtype": "Float",
-                                        "width": 100
+                                        "width": 105
                                 },
                                 {
                                         "label": _("QTR-4 Total Qty"),
@@ -118,7 +118,7 @@ def get_columns(filters):
                                         "label": _("QTR-4 Amount"),
                                         "fieldname": "amount4",
                                         "fieldtype": "Float",
-                                        "width": 100
+                                        "width": 105
                                 }
                         ]
                 )
