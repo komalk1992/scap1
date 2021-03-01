@@ -8,7 +8,7 @@ from erpnext.accounts.utils import get_fiscal_year
 def execute(filters=None):
         columns, data = get_columns(), get_data(filters)
         return columns, data
-
+"""
 def get_columns():
         columns = [
                 {
@@ -31,6 +31,36 @@ def get_columns():
                         "width": 100
                 }
         ]
+        return columns
+"""
+def get_columns(filters):
+        columns = []
+
+        if filters.get('range') == ('Week'):
+                columns.extend(
+                        [
+                              {
+                                        "label": _("Item"),
+                                        "fieldname": "item_code",
+                                        "fieldtype": "Link",
+                                        "options": "Item",
+                                        "width": 150
+                                },
+                                {
+                                        "label": _("Total Qty"),
+                                        "fieldname": "qty",
+                                        "fieldtype": "Float",
+                                        "width": 100
+                                },
+                                {
+                                        "label": _("Amount"),
+                                        "fieldname": "amount",
+                                        "fieldtype": "Float",
+                                        "width": 100
+                                }  
+                        ]
+                )
+
         return columns
 
 def get_data(filters):
