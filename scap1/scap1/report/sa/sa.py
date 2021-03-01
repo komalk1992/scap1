@@ -61,6 +61,30 @@ def get_columns(filters):
                                 }  
                         ]
                 )
+        if filters.get('range') == ('Quarterly'):
+                columns.extend(
+                        [
+                              {
+                                        "label": _("Item"),
+                                        "fieldname": "item_code",
+                                        "fieldtype": "Link",
+                                        "options": "Item",
+                                        "width": 150
+                                },
+                                {
+                                        "label": _("QTR-1 Total Qty"),
+                                        "fieldname": "qty",
+                                        "fieldtype": "Float",
+                                        "width": 120
+                                },
+                                {
+                                        "label": _("QTR-1 Amount"),
+                                        "fieldname": "amount",
+                                        "fieldtype": "Float",
+                                        "width": 120
+                                }  
+                        ]
+                )
 
         return columns
 
@@ -82,6 +106,24 @@ def get_data(filters):
                             `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters, as_list=1)
 
             return datasales
+
+        if filters.get('range') == ('Quarterly'):
+            
+            datasales1 =  frappe.db.sql("""
+                    SELECT
+                            `tabSales Order Item`.item_code,
+                            sum(`tabSales Order Item`.transaction_date between "2020-04-01" and "2020-06-30", qty, 0),
+                            sum(`tabSales Order Item`.transaction_date between "2020-04-01" and "2020-06-30", amount, 0)
+                    FROM
+                            `tabSales Order Item`,`tabSales Order`
+                    WHERE
+                            `tabSales Order Item`.`parent`=`tabSales Order`.`name`
+                AND `tabSales Order`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
+                            {conditions}
+                    GROUP BY
+                            `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters, as_list=1)
+
+            return datasales1
 
 def get_conditions(filters) :
         conditions = []
