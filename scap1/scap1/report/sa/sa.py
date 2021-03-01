@@ -6,8 +6,8 @@ from six import iteritems
 from erpnext.accounts.utils import get_fiscal_year
 
 def execute(filters=None):
-        columns, data = get_columns(filters), get_data()
-
+        columns, data = get_columns(filters), get_data(filters)
+        
         return columns, data
 """
 def get_columns():
