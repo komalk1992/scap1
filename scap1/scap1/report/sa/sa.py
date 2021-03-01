@@ -76,14 +76,50 @@ def get_columns(filters):
                                         "label": _("QTR-1 Total Qty"),
                                         "fieldname": "qty",
                                         "fieldtype": "Float",
-                                        "width": 120
+                                        "width": 115
                                 },
                                 {
                                         "label": _("QTR-1 Amount"),
                                         "fieldname": "amount",
                                         "fieldtype": "Float",
-                                        "width": 120
-                                }  
+                                        "width": 100
+                                },
+                                {
+                                        "label": _("QTR-2 Total Qty"),
+                                        "fieldname": "qty",
+                                        "fieldtype": "Float",
+                                        "width": 115
+                                },
+                                {
+                                        "label": _("QTR-2 Amount"),
+                                        "fieldname": "amount",
+                                        "fieldtype": "Float",
+                                        "width": 100
+                                },
+                                {
+                                        "label": _("QTR-3 Total Qty"),
+                                        "fieldname": "qty",
+                                        "fieldtype": "Float",
+                                        "width": 115
+                                },
+                                {
+                                        "label": _("QTR-3 Amount"),
+                                        "fieldname": "amount",
+                                        "fieldtype": "Float",
+                                        "width": 100
+                                },
+                                {
+                                        "label": _("QTR-4 Total Qty"),
+                                        "fieldname": "qty",
+                                        "fieldtype": "Float",
+                                        "width": 115
+                                },
+                                {
+                                        "label": _("QTR-4 Amount"),
+                                        "fieldname": "amount",
+                                        "fieldtype": "Float",
+                                        "width": 100
+                                }
                         ]
                 )
 
@@ -114,7 +150,13 @@ def get_data(filters):
                     SELECT
                             `tabSales Order Item`.item_code,
                             sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", qty, 0)),
-                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0))
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-04-01" and "2020-06-30", amount, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", qty, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-07-01" and "2020-09-30", amount, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-10-01" and "2020-12-31", qty, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2020-10-01" and "2020-12-31", amount, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2021-01-01" and "2021-03-31", qty, 0)),
+                            sum(if(`tabSales Order`.`transaction_date` between "2021-01-01" and "2021-03-31", amount, 0))
                     FROM
                             `tabSales Order Item`,`tabSales Order`
                     WHERE
