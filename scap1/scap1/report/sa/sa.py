@@ -19,6 +19,12 @@ def get_columns():
                         "width": 150
                 },
                 {
+                        "label": _("Total Qty"),
+                        "fieldname": "qty",
+                        "fieldtype": "Float",
+                        "width": 120
+                },
+                {
                         "label": _("Amount"),
                         "fieldname": "amount",
                         "fieldtype": "Float",
@@ -31,6 +37,7 @@ def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
                         `tabSales Order Item`.item_code,
+                        sum(`tabSales Order Item`.qty),
                         sum(`tabSales Order Item`.amount)
                 FROM
                         `tabSales Order Item`,`tabSales Order`
