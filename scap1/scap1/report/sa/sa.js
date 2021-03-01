@@ -26,7 +26,7 @@ frappe.query_reports["SA"] = {
 			label: __("Range"),
 			fieldtype: "Select",
 			options: [
-				{ "value": "", "label": __("") },
+				 "Select",
 				{ "value": "Monthly", "label": __("Monthly") },
 				{ "value": "Quarterly", "label": __("Quarterly") },
 				{ "value": "Yearly", "label": __("Yearly") }
