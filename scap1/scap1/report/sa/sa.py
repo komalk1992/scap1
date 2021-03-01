@@ -37,7 +37,7 @@ def get_columns():
 def get_columns(filters):
         columns = []
 
-        if filters.get('range') == ('Week'):
+        if filters.get('range') == ('Yearly'):
                 columns.extend(
                         [
                               {
@@ -65,7 +65,7 @@ def get_columns(filters):
         return columns
 
 def get_data(filters):
-         if filters.get('range') == ('Week'):
+         if filters.get('range') == ('Yearly'):
             
             datasales =  frappe.db.sql("""
                     SELECT
