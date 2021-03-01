@@ -86,37 +86,37 @@ def get_columns(filters):
                                 },
                                 {
                                         "label": _("QTR-2 Total Qty"),
-                                        "fieldname": "qty",
+                                        "fieldname": "qty2",
                                         "fieldtype": "Float",
                                         "width": 115
                                 },
                                 {
                                         "label": _("QTR-2 Amount"),
-                                        "fieldname": "amount",
+                                        "fieldname": "amount2",
                                         "fieldtype": "Float",
                                         "width": 100
                                 },
                                 {
                                         "label": _("QTR-3 Total Qty"),
-                                        "fieldname": "qty",
+                                        "fieldname": "qty3",
                                         "fieldtype": "Float",
                                         "width": 115
                                 },
                                 {
                                         "label": _("QTR-3 Amount"),
-                                        "fieldname": "amount",
+                                        "fieldname": "amount3",
                                         "fieldtype": "Float",
                                         "width": 100
                                 },
                                 {
                                         "label": _("QTR-4 Total Qty"),
-                                        "fieldname": "qty",
+                                        "fieldname": "qty4",
                                         "fieldtype": "Float",
                                         "width": 115
                                 },
                                 {
                                         "label": _("QTR-4 Amount"),
-                                        "fieldname": "amount",
+                                        "fieldname": "amount4",
                                         "fieldtype": "Float",
                                         "width": 100
                                 }
