@@ -145,7 +145,7 @@ def get_data(filters):
             return datasales
 
         if filters.get('range') == ('Quarterly'):
-            Ram = 2020-04-01;
+            Ram = '2020-04-01'
             datasales1 =  frappe.db.sql("""
                     SELECT
                             `tabSales Order Item`.item_code,
