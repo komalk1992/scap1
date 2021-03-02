@@ -167,6 +167,7 @@ def get_data(filters):
                             `tabSales Order Item`.item_code """.format(conditions=get_conditions(filters)), filters, as_list=1)
 
             return datasales1
+            return Ram
 
 def get_conditions(filters) :
         conditions = []
