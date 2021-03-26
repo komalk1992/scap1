@@ -39,7 +39,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Scap1",
- "modified": "2021-02-09 11:23:01.746795",
+ "modified": "2021-03-26 15:53:47.872038",
  "modified_by": "Administrator",
  "module": "Scap1",
  "name": "Scap1",
@@ -85,6 +85,12 @@
    "doc_view": "",
    "label": "Product Sales",
    "link_to": "prosales",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "PURCHASE REQUISITION LISTIING",
+   "link_to": "PURCHASE REQUISITIONS LISTING1",
    "type": "Report"
   }
  ]
