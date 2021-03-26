@@ -68,7 +68,8 @@ def get_data(filters):
                         `tabMaterial Request Item`,`tabMaterial Request`
                 WHERE
                         `tabMaterial Request Item`.`parent`=`tabMaterial Request`.`name`
-			 AND `tabMaterial Request`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
+                        AND `tabMaterial Request`.docstatus = 1
+                        AND `tabMaterial Request`.transaction_date BETWEEN %(from_date)s AND %(to_date)s
                         {conditions}
                 GROUP BY
                         `tabMaterial Request Item`.item_code """.format(conditions=get_conditions(filters)), filters,as_list=1)
