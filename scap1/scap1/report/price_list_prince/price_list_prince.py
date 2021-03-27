@@ -21,44 +21,6 @@ def get_columns():
 			"width": 120
 		},
 		{
-			"label": _("Item Name"),
-			"fieldname": "item_name",
-			"fieldtype": "Data",
-			"width": 120
-		},
-		{
-			"label": _("Brand"),
-			"fieldname": "brand",
-			"fieldtype": "Data",
-			"width": 100
-		},
-		{
-			"label": _("Warehouse"),
-			"fieldname": "warehouse",
-			"fieldtype": "Link",
-			"options": "Warehouse",
-			"width": 120
-		},
-		{
-			"label": _("Stock Available"),
-			"fieldname": "stock_available",
-			"fieldtype": "Float",
-			"width": 120
-		},
-		{
-			"label": _("Buying Price List"),
-			"fieldname": "buying_price_list",
-			"fieldtype": "Link",
-			"options": "Price List",
-			"width": 120
-		},
-		{
-			"label": _("Buying Rate"),
-			"fieldname": "buying_rate",
-			"fieldtype": "Currency",
-			"width": 120
-		},
-		{
 			"label": _("Selling Price List"),
 			"fieldname": "selling_price_list",
 			"fieldtype": "Link",
