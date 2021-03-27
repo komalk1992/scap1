@@ -4,6 +4,12 @@
 
 frappe.query_reports["Price List Prince"] = {
 	"filters": [
+		{
+			"fieldname":"item_code",
+			"label": __("Item"),
+			"fieldtype": "Link",
+			"options": "Item"
+		}
 
 	]
 };
