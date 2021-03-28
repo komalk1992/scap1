@@ -9,7 +9,12 @@ frappe.query_reports["Price List Prince"] = {
 			"label": __("Item"),
 			"fieldtype": "Link",
 			"options": "Item"
+		},
+		{
+			"fieldname":"price_list",
+			"label": __("Price List"),
+			"fieldtype": "Link",
+			"options": "Price List"
 		}
-
 	]
 };
