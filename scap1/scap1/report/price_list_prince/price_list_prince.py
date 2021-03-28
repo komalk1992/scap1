@@ -37,13 +37,13 @@ def get_columns():
 		{
 			"label": _("Valid From"),
 			"fieldname": "valid_from",
-			"fieldtype": "Float",
+			"fieldtype": "Date",
 			"width": 100
 		},
 		{
 			"label": _("Valid Upto"),
 			"fieldname": "valid_upto",
-			"fieldtype": "Float",
+			"fieldtype": "Date",
 			"width": 100
 		}
 	]
