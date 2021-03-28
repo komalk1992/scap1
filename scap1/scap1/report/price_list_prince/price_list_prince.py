@@ -16,6 +16,13 @@ def get_columns():
 			"width": 150
 		},
 		{
+			"label": _("Price List"),
+			"fieldname": "price_list",
+			"fieldtype": "Link",
+			"options": "Price List",
+			"width": 150
+		},
+		{
 			"label": _("Price List Rate"),
 			"fieldname": "price_list_rate",
 			"fieldtype": "Float",
@@ -28,6 +35,7 @@ def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
                         `tabItem Price`.item_code,
+                        `tabItem Price`.price_list,
                         `tabItem Price`.price_list_rate
                 FROM
                         `tabItem Price`
