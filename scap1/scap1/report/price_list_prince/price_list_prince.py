@@ -16,6 +16,12 @@ def get_columns():
 			"width": 150
 		},
 		{
+			"label": _("MRP"),
+			"fieldname": "price_list_rate",
+			"fieldtype": "Float",
+			"width": 120
+		},
+		{
 			"label": _("Price List"),
 			"fieldname": "price_list",
 			"fieldtype": "Link",
@@ -34,13 +40,16 @@ def get_columns():
 def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
-                        `tabItem Price`.item_code,
-                        `tabItem Price`.price_list,
-                        `tabItem Price`.price_list_rate
+                        `ip`.item_code,
+                        if(`ipp`.price_list = "MRP", `ipp`.price_list_rate, null),
+                        `ip`.price_list,
+                        `ip`.price_list_rate
                 FROM
-                        `tabItem Price`
+                        `tabItem Price` ip, `tabItem Price` ipp
                 WHERE
-                        `tabItem Price`.price_list = %(price_list)s
+                        `ipp`.price_list = "MRP" <> `ip`.price_list
+                        AND `ipp`.item_code = `ip`.item_code
+                        AND `ip`.price_list = %(price_list)s
                         {conditions}""".format(conditions=get_conditions(filters)), filters,as_list=1)
 
         return datasales
