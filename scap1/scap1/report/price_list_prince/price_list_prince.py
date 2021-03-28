@@ -33,6 +33,18 @@ def get_columns():
 			"fieldname": "price_list_rate",
 			"fieldtype": "Float",
 			"width": 120
+		},
+		{
+			"label": _("Valid From"),
+			"fieldname": "valid_from",
+			"fieldtype": "Float",
+			"width": 100
+		},
+		{
+			"label": _("Valid Upto"),
+			"fieldname": "valid_upto",
+			"fieldtype": "Float",
+			"width": 100
 		}
 	]
 	return columns
@@ -43,7 +55,9 @@ def get_data(filters):
                         `ip`.item_code,
                         if(`ipp`.price_list = "MRP", `ipp`.price_list_rate, null),
                         `ip`.price_list,
-                        `ip`.price_list_rate
+                        `ip`.price_list_rate,
+                        `ip`.valid_from,
+                        `ip`.valid_upto
                 FROM
                         `tabItem Price` ip, `tabItem Price` ipp
                 WHERE
