@@ -17,7 +17,7 @@ def get_columns():
 		},
 		{
 			"label": _("MRP"),
-			"fieldname": "price_list_rate",
+			"fieldname": "price_list_rate1",
 			"fieldtype": "Float",
 			"width": 120
 		},
