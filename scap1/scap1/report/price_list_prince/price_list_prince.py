@@ -28,17 +28,17 @@ def get_columns():
 			"width": 120
 		},
 		{
+			"label": _("Price List Rate"),
+			"fieldname": "price_list_rate",
+			"fieldtype": "Float",
+			"width": 120
+		},
+		{
 			"label": _("Price List"),
 			"fieldname": "price_list",
 			"fieldtype": "Link",
 			"options": "Price List",
 			"width": 150
-		},
-		{
-			"label": _("Price List Rate"),
-			"fieldname": "price_list_rate",
-			"fieldtype": "Float",
-			"width": 120
 		},
 		{
 			"label": _("Valid From"),
@@ -59,9 +59,10 @@ def get_data(filters):
         datasales =  frappe.db.sql("""
                 SELECT
                         `ip`.item_code,
+                        `ip`.item_name,
                         if(`ipp`.price_list = "MRP", `ipp`.price_list_rate, null),
-                        `ip`.price_list,
                         `ip`.price_list_rate,
+                        `ip`.price_list,
                         `ip`.valid_from,
                         `ip`.valid_upto
                 FROM
