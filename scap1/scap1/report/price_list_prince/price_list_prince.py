@@ -39,6 +39,8 @@ def get_data(filters):
                         `tabItem Price`.price_list_rate
                 FROM
                         `tabItem Price`
+                WHERE
+                        `tabItem Price`.price_list = %(price_list)s
                         {conditions}""".format(conditions=get_conditions(filters)), filters,as_list=1)
 
         return datasales
