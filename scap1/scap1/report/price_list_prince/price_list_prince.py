@@ -18,7 +18,7 @@ def get_columns():
 		{
 			"label": _("Item Name"),
 			"fieldname": "item_name",
-			"fieldtype": "Date",
+			"fieldtype": "Data",
 			"width": 150
 		},
 		{
