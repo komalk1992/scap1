@@ -14,7 +14,8 @@ frappe.query_reports["Price List Prince"] = {
 			"fieldname":"price_list",
 			"label": __("Price List"),
 			"fieldtype": "Link",
-			"options": "Price List"
+			"options": "Price List",
+			"default": "Gujarat Stockist",
 		}
 	]
 };
