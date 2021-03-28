@@ -58,8 +58,6 @@ def get_conditions(filters) :
 	conditions = []
 
 	if filters.get("item_code"):
-		conditions.append(" and `ip`.item_code=%(item_code)s")
-	if filters.get("price_list"):
-		conditions.append(" and `ip`.price_list=%(price_list)s")	
+		conditions.append(" and `ip`.item_code=%(item_code)s")	
 
 	return " ".join(conditions) if conditions else ""
