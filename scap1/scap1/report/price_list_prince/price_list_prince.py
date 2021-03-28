@@ -16,6 +16,12 @@ def get_columns():
 			"width": 150
 		},
 		{
+			"label": _("Item Name"),
+			"fieldname": "item_name",
+			"fieldtype": "Date",
+			"width": 150
+		},
+		{
 			"label": _("MRP"),
 			"fieldname": "price_list_rate1",
 			"fieldtype": "Float",
