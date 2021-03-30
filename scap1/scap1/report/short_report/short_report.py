@@ -102,5 +102,7 @@ def get_conditions(filters) :
 
 	if filters.get("item_code"):
 		conditions.append(" and `tabSales Order Item`.item_code=%(item_code)s")
+	if filters.get("customer"):
+		conditions.append(" and `tabSales Order`.customer=%(customer)s")	
 
 	return " ".join(conditions) if conditions else ""

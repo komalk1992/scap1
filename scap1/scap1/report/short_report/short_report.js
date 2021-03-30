@@ -9,6 +9,12 @@ frappe.query_reports["Short Report"] = {
                         "label": __("Item"),
                         "fieldtype": "Link",
                         "options": "Item"
+                },
+                {
+                        "fieldname":"customer",
+                        "label": __("Customer"),
+                        "fieldtype": "Link",
+                        "options": "Customer"
                 }
         ]
 };
