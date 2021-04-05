@@ -58,7 +58,7 @@ def execute(filters=None):
 			shortage_qty = bin.actual_qty - re_order_level
 			
 
-		data.append([item.name, item.item_name, item.item_group, bin.warehouse,
+		data.append([item.name, item.item_group, bin.warehouse,
 			item.stock_uom, bin.actual_qty, bin.ordered_qty,
 			bin.projected_qty, re_order_level, re_order_qty, shortage_qty])
 
@@ -72,7 +72,6 @@ def execute(filters=None):
 def get_columns():
 	return [
 		{"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 140},
-		#{"label": _("Item Name"), "fieldname": "item_name", "width": 100},
 		{"label": _("Item Group"), "fieldname": "item_group", "fieldtype": "Link", "options": "Item Group", "width": 100},
 		{"label": _("Warehouse"), "fieldname": "warehouse", "fieldtype": "Link", "options": "Warehouse", "width": 120},
 		{"label": _("UOM"), "fieldname": "stock_uom", "fieldtype": "Link", "options": "UOM", "width": 100},
