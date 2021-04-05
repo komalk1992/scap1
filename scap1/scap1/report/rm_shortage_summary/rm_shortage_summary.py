@@ -55,7 +55,7 @@ def execute(filters=None):
 
 		shortage_qty = 0
 		#if (re_order_level or re_order_qty) and re_order_level > bin.projected_qty:
-			shortage_qty = re_order_level
+			shortage_qty = flt(bin.actual_qty) - re_order_level
 			
 
 		data.append([item.name, item.item_name, item.description, item.item_group, item.brand, bin.warehouse,
