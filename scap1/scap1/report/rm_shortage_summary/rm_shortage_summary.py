@@ -54,13 +54,12 @@ def execute(filters=None):
 				re_order_qty = d.warehouse_reorder_qty
 
 		shortage_qty = 0
-		#if (re_order_level or re_order_qty) and re_order_level > bin.projected_qty:
-			shortage_qty = flt(bin.actual_qty) - re_order_level
+		if (re_order_level or re_order_qty) and re_order_level > bin.projected_qty:
+			shortage_qty = bin.actual_qty - re_order_level
 			
 
-		data.append([item.name, item.item_name, item.description, item.item_group, item.brand, bin.warehouse,
-			item.stock_uom, bin.actual_qty, bin.planned_qty, bin.indented_qty, bin.ordered_qty,
-			bin.reserved_qty, bin.reserved_qty_for_production, bin.reserved_qty_for_sub_contract,
+		data.append([item.name, item.item_name, item.item_group, bin.warehouse,
+			item.stock_uom, bin.actual_qty, bin.ordered_qty,
 			bin.projected_qty, re_order_level, re_order_qty, shortage_qty])
 
 		if include_uom:
@@ -73,21 +72,12 @@ def execute(filters=None):
 def get_columns():
 	return [
 		{"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 140},
-		{"label": _("Item Name"), "fieldname": "item_name", "width": 100},
-		{"label": _("Description"), "fieldname": "description", "width": 200},
+		#{"label": _("Item Name"), "fieldname": "item_name", "width": 100},
 		{"label": _("Item Group"), "fieldname": "item_group", "fieldtype": "Link", "options": "Item Group", "width": 100},
-		{"label": _("Brand"), "fieldname": "brand", "fieldtype": "Link", "options": "Brand", "width": 100},
 		{"label": _("Warehouse"), "fieldname": "warehouse", "fieldtype": "Link", "options": "Warehouse", "width": 120},
 		{"label": _("UOM"), "fieldname": "stock_uom", "fieldtype": "Link", "options": "UOM", "width": 100},
 		{"label": _("Actual Qty"), "fieldname": "actual_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
-		{"label": _("Planned Qty"), "fieldname": "planned_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
-		{"label": _("Requested Qty"), "fieldname": "indented_qty", "fieldtype": "Float", "width": 110, "convertible": "qty"},
 		{"label": _("Ordered Qty"), "fieldname": "ordered_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
-		{"label": _("Reserved Qty"), "fieldname": "reserved_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
-		{"label": _("Reserved Qty for Production"), "fieldname": "reserved_qty_for_production", "fieldtype": "Float",
-			"width": 100, "convertible": "qty"},
-		{"label": _("Reserved for sub contracting"), "fieldname": "reserved_qty_for_sub_contract", "fieldtype": "Float",
-			"width": 100, "convertible": "qty"},
 		{"label": _("Projected Qty"), "fieldname": "projected_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
 		{"label": _("Reorder Level"), "fieldname": "re_order_level", "fieldtype": "Float", "width": 100, "convertible": "qty"},
 		{"label": _("Reorder Qty"), "fieldname": "re_order_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
