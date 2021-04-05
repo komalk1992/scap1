@@ -55,13 +55,13 @@ def execute(filters=None):
 
 		shortage_qty = 0
 		if (re_order_level or re_order_qty) and re_order_level > bin.projected_qty:
-			shortage_qty = re_order_level - flt(bin.projected_qty)
-			rm_shortage_qty = re_order_level - actual_qty
+			shortage_qty = re_order_level - flt(bin.actual_qty)
+			
 
 		data.append([item.name, item.item_name, item.description, item.item_group, item.brand, bin.warehouse,
 			item.stock_uom, bin.actual_qty, bin.planned_qty, bin.indented_qty, bin.ordered_qty,
 			bin.reserved_qty, bin.reserved_qty_for_production, bin.reserved_qty_for_sub_contract,
-			bin.projected_qty, re_order_level, re_order_qty, shortage_qty, rm_shortage_qty])
+			bin.projected_qty, re_order_level, re_order_qty, shortage_qty])
 
 		if include_uom:
 			conversion_factors.append(item.conversion_factor)
@@ -92,7 +92,7 @@ def get_columns():
 		{"label": _("Reorder Level"), "fieldname": "re_order_level", "fieldtype": "Float", "width": 100, "convertible": "qty"},
 		{"label": _("Reorder Qty"), "fieldname": "re_order_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
 		{"label": _("Shortage Qty"), "fieldname": "shortage_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"}
-		{"label": _("RM Shortage Qty"), "fieldname": "rm_shortage_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"}
+		
 	]
 
 def get_bin_list(filters):
