@@ -58,9 +58,9 @@ def execute(filters=None):
 			shortage_qty = bin.actual_qty - re_order_level
 			
 
-		data.append([item.name, item.item_group, bin.warehouse,
-			item.stock_uom, bin.actual_qty, bin.ordered_qty,
-			bin.projected_qty, re_order_level, re_order_qty, shortage_qty])
+		data.append([item.name, item.stock_uom, bin.actual_qty, re_order_level,
+			     shortage_qty, bin.ordered_qty, bin.projected_qty, re_order_qty,
+			     item.item_group, bin.warehouse])
 
 		if include_uom:
 			conversion_factors.append(item.conversion_factor)
