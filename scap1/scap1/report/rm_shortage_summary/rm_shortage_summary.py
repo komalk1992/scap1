@@ -75,8 +75,8 @@ def get_columns():
 	return [
 		{"label": _("Parent Item Group"), "fieldname": "parent_item_group", "fieldtype": "Link", "options": "Item Group", "width": 200},
 		{"label": _("Item Group"), "fieldname": "item_group", "fieldtype": "Link", "options": "Item Group", "width": 200},
-		{"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 300},
-		{"label": _("Item Name"), "fieldname": "item_name", "fieldtype": "Data", "width": 300},
+		{"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 200},
+		{"label": _("Item Name"), "fieldname": "item_name", "fieldtype": "Data", "width": 250},
 		{"label": _("UOM"), "fieldname": "stock_uom", "fieldtype": "Link", "options": "UOM", "width": 70},
 		{"label": _("Actual Qty"), "fieldname": "actual_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
 		{"label": _("Shortage Qty"), "fieldname": "shortage_qty", "fieldtype": "Float", "width": 100, "convertible": "qty"},
