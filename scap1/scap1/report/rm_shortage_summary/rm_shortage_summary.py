@@ -42,6 +42,8 @@ def execute(filters=None):
 			
 		elif filters.item_group and filters.item_group != item.item_group:
 			continue
+		elif filters.parent_item_group and filters.parent_item_group != item.parent_item_group:
+			continue	
 
 		elif filters.company and filters.company != company:
 			continue
@@ -58,9 +60,9 @@ def execute(filters=None):
 			shortage_qty = bin.actual_qty - re_order_level
 			
 
-		data.append([item.name,item.item.item_name, item.stock_uom, bin.actual_qty, re_order_level,
+		data.append([item.parent_item_group, item.item_group, item.name,item.item.item_name, item.stock_uom, bin.actual_qty, re_order_level,
 			     shortage_qty, bin.ordered_qty, bin.projected_qty, re_order_qty,
-			     item.item_group, bin.warehouse])
+			     bin.warehouse])
 
 		if include_uom:
 			conversion_factors.append(item.conversion_factor)
@@ -120,7 +122,7 @@ def get_item_map(item_code, include_uom):
 		cf_join = "left join `tabUOM Conversion Detail` ucd on ucd.parent=item.name and ucd.uom=%(include_uom)s"
 
 	items = frappe.db.sql("""
-		select item.name, item.item_name, item.description, item.item_group, item.brand, item.stock_uom{cf_field}
+		select item.name, item.item_name, item.description, item.item_group, item.parent_item_group, item.brand, item.stock_uom{cf_field}
 		from `tabItem` item
 		{cf_join}
 		where item.is_stock_item = 1
