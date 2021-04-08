@@ -29,11 +29,16 @@ frappe.query_reports["RM Shortage Summary"] = {
 			}
 		},
 		{
+			"fieldname":"parent_item_group",
+			"label": __("Parent Item Group"),
+			"fieldtype": "Link",
+			"options": "Item Group"
+		}
+		{
 			"fieldname":"item_group",
 			"label": __("Item Group"),
 			"fieldtype": "Link",
 			"options": "Item Group"
 		}
-
 	]
 };
