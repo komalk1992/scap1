@@ -60,7 +60,7 @@ def execute(filters=None):
 			shortage_qty = bin.actual_qty - re_order_level
 			
 
-		data.append([item.parent_item_group, item.item_group, item.name,item.item.item_name, item.stock_uom, bin.actual_qty, re_order_level,
+		data.append([item.parent_item_group, item.item_group, item.name, item.item_name, item.stock_uom, bin.actual_qty, re_order_level,
 			     shortage_qty, bin.ordered_qty, bin.projected_qty, re_order_qty,
 			     bin.warehouse])
 
