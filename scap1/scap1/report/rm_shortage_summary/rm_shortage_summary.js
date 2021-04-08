@@ -33,7 +33,7 @@ frappe.query_reports["RM Shortage Summary"] = {
 			"label": __("Parent Item Group"),
 			"fieldtype": "Link",
 			"options": "Item Group"
-		}
+		},
 		{
 			"fieldname":"item_group",
 			"label": __("Item Group"),
